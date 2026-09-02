@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Kelola Portofolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+    <!-- 1. BAGIAN HALAMAN LOGIN (Tampil Pertama) -->
+    <div id="loginScreen" class="w-full max-w-md glass-card p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-neonPurple/20 blur-[40px] rounded-full"></div>
+        
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-white mb-2">Admin <span class="text-[#00f3ff]" style="text-shadow: 0 0 10px #00f3ff;">Login</span></h1>
+            <p class="text-gray-400 text-sm">Masukkan sandi untuk mengakses panel kontrol.</p>
+        </div>
+
+        <form id="formLogin">
+            <div class="mb-4">
+                <label class="block text-sm text-gray-400 mb-2">Username</label>
+                <input type="text" id="username" required placeholder="admin" 
+                       class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors">
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm text-gray-400 mb-2">Password</label>
+                <input type="password" id="password" required placeholder="••••••••" 
+                       class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#b026ff] transition-colors">
+            </div>
+            <button type="submit" class="w-full btn-neon py-3 rounded-lg flex justify-center items-center gap-2">
+                <i class="fas fa-sign-in-alt"></i> Masuk Dashboard
+            </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+            <a href="index.html" class="text-xs text-gray-500 hover:text-gray-300 transition-colors">
+                <i class="fas fa-arrow-left mr-1"></i> Kembali ke Website Utama
+            </a>
+        </div>
+    </div>
+
+    <!-- 2. BAGIAN DASHBOARD ADMIN (Disembunyikan dulu pakai kelas 'hidden') -->
+    <div id="dashboardScreen" class="hidden w-full max-w-6xl mx-auto py-10">
+        <!-- Header Admin -->
+        <header class="flex justify-between items-center mb-10 border-b border-gray-800 pb-5">
+            <h1 class="text-3xl font-bold text-white">
+                Panel <span class="text-[#00f3ff]" style="text-shadow: 0 0 10px #00f3ff;">Admin</span>
+            </h1>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors">
+                    <i class="fas fa-eye mr-2"></i> Lihat Website
+                </a>
+                <button onclick="logout()" class="px-4 py-2 bg-red-900/50 hover:bg-red-900 text-red-300 rounded-lg text-sm transition-colors border border-red-700">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Keluar
+                </button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- FORM TAMBAH PROJECT -->
+            <div class="glass-card p-6 rounded-2xl h-fit">
+                <h2 class="text-xl font-bold text-white mb-6 border-l-4 border-[#b026ff] pl-3">Tambah Project Baru</h2>
+                
+                <form id="formTambahProject">
+                    <div class="mb-4">
+                        <label class="block text-sm text-gray-400 mb-2">Judul Project</label>
+                        <input type="text" id="judul" required placeholder="Contoh: Aplikasi Kasir" 
+                               class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00f3ff]">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm text-gray-400 mb-2">Kategori (Skill)</label>
+                        <input type="text" id="kategori" required placeholder="Contoh: React, Tailwind" 
+                               class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00f3ff]">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm text-gray-400 mb-2">Deskripsi Singkat</label>
+                        <textarea id="deskripsi" rows="3" required placeholder="Deskripsi project..."
+                                  class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00f3ff] resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full btn-neon py-3 rounded-lg flex justify-center items-center gap-2">
+                        <i class="fas fa-plus"></i> Simpan Project
+                    </button>
+                </form>
+            </div>
+
+            <!-- DAFTAR PROJECT (TABEL) -->
+            <div class="lg:col-span-2 glass-card p-6 rounded-2xl">
+                <h2 class="text-xl font-bold text-white mb-6 border-l-4 border-[#00f3ff] pl-3">Daftar Project Saat Ini</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-black/40 text-gray-400 text-sm border-b border-gray-800">
+                                <th class="p-4 font-medium">Nama Project</th>
+                                <th class="p-4 font-medium">Kategori</th>
+                                <th class="p-4 font-medium text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelProject">
+                            <tr class="border-b border-gray-800/50 hover:bg-white/[0.02]">
+                                <td class="p-4 font-semibold text-white">NeonMarket Platform</td>
+                                <td class="p-4 text-sm text-gray-400">React, Tailwind</td>
+                                <td class="p-4 flex justify-center gap-3">
+                                    <button class="text-blue-400 hover:text-blue-300"><i class="fas fa-edit"></i></button>
+                                    <button class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Simulasi Login -->
+    <script>
+        const loginScreen = document.getElementById('loginScreen');
+        const dashboardScreen = document.getElementById('dashboardScreen');
+        const formLogin = document.getElementById('formLogin');
+
+        // Saat tombol "Masuk Dashboard" ditekan
+        formLogin.addEventListener('submit', (e) => {
+            e.preventDefault(); // Mencegah reload
+            
+            // Sembunyikan layar login, tampilkan dashboard admin
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+        });
+
+        // Tombol Keluar (Logout)
+        function logout() {
+            // Sembunyikan dashboard, tampilkan kembali layar login
+            dashboardScreen.classList.add('hidden');
+            loginScreen.classList.remove('hidden');
+            formLogin.reset();
+        }
+    </script>
+</body>
+</html>
