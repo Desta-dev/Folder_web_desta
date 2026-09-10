@@ -1,0 +1,21 @@
+body {
+    background-color: #050510;
+    color: #f3f4f6;
+    font-family: 'Poppins', sans-serif;
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.btn-neon {
+    background: linear-gradient(135deg, #4b5563 0%, #9ca3af 50%, #f3f4f6 100%);
+    color: #111827;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-neon:hover {
+    color: #ffffff;
+    background: #111827;
+    box-shadow: 0 0 15px #b026ff, 0 0 30px #00f3ff;
+}
