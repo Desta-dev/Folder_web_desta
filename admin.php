@@ -27,7 +27,7 @@ if (!isset($_SESSION['username'])) {
                 Panel <span class="text-[#00f3ff]" style="text-shadow: 0 0 10px #00f3ff;">Admin</span>
             </h1>
             <div class="flex items-center gap-4">
-                <a href="index.php" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors text-white">
+                <a href="index.html" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors text-white">
                     <i class="fas fa-eye mr-2"></i> Lihat Website
                 </a>
                 <a href="logout.php" class="px-4 py-2 bg-red-900/50 hover:bg-red-900 text-red-300 rounded-lg text-sm transition-colors border border-red-700 block">
